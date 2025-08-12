@@ -1,0 +1,314 @@
+{
+    "tasks": {
+        "dev:app": {
+            "directory": "apps/app",
+            "command": "pnpm run dev"
+        },
+        "i:app": {
+            "directory": "apps/app",
+            "command": "pnpm i --filter app  --prefer-offline --no-cache"
+        },
+        "db:app": {
+            "directory": "apps/app",
+            "command": "pnpm run db:all"
+        },
+        "db:seed": {
+            "directory": "apps/app",
+            "command": "pnpm run db:seed"
+        },
+        "db:gen": {
+            "directory": "apps/app",
+            "command": "pnpm run db:gen"
+        },
+        "db:studio": {
+            "directory": "apps/app",
+            "command": "npx prisma studio"
+        },
+        "gen:app": {
+            "directory": "apps/app",
+            "command": "pnpm run db:gen"
+        },
+        "push:app": {
+            "directory": "apps/app",
+            "command": "git add * && git commit -m \"Cleaning w/ push\" && git push"
+        },
+        "patch:app": {
+            "directory": "apps/app",
+            "command": "git add * && git commit -m \"Cleaning w/ push\" && git push && pnpm version patch && git push && git push --tags"
+        },
+        "build:app": {
+            "directory": "apps/app",
+            "command": "pnpm run build"
+        },
+        "update:app": {
+            "directory": "apps",
+            "command": "robocopy \"app\\app\" \"prod\\app\" /E /COPYALL /R:3 /W:5 /LOG:copy_log.txt"
+        },
+        "nuclear:all": {
+            "sequential": true,
+            "tasks": [
+                "clean:all",
+                "i:all",
+                "build:all",
+                "build:prod",
+                "db:all",
+                "db:prod",
+                "patch:all",
+                "dev:all"
+            ]
+        },
+        "clean:all": {
+            "tasks": [
+                "clean:app",
+                "clean:root",
+                "clean:web",
+                "clean:prod",
+                "clean:typescript-config",
+                "clean:eslint-config",
+                "clean:ui"
+            ]
+        },
+        "clean:app": {
+            "directory": "apps/app",
+            "command": "foreach ($path in @('.cache', 'build', 'node_modules', 'pnpm-lock.yaml',  'public\build' )) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "clean:prod": {
+            "directory": "apps/prod",
+            "command": "foreach ($path in @('node_modules', 'pnpm-lock.yaml', '.cache', 'public\build', 'build')) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "clean:web": {
+            "directory": "apps/web",
+            "command": "foreach ($path in @('node_modules', 'pnpm-lock.yaml', '.cache', 'public\build', 'build')) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "clean:eslint-config": {
+            "directory": "packages/eslint-config",
+            "command": "foreach ($path in @('node_modules', 'pnpm-lock.yaml', '.cache', 'public\build', 'build')) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "clean:typescript-config": {
+            "directory": "packages/typescript-config",
+            "command": "foreach ($path in @('node_modules', 'pnpm-lock.yaml', '.cache', 'public\build', 'build')) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "clean:ui": {
+            "directory": "packages/ui",
+            "command": "foreach ($path in @('node_modules', 'pnpm-lock.yaml', '.cache', 'public\build', 'build')) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "clean:root": {
+            "directory": "apps/prod",
+            "command": "foreach ($path in @('.pnpm-cache','.pnpm-cache', 'node_modules', 'pnpm-lock.yaml', '.cache', 'public\build', 'build')) { if (Test-Path $path) { Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue } }"
+        },
+        "i:all": {
+            "directory": "",
+            "tasks": [
+                "i:app",
+                "i:web",
+                "i:prod",
+                "i:eslint-config",
+                "i:typescript-config",
+                "i:ui"
+            ]
+        },
+        "i:root": {
+            "directory": ".",
+            "command": "pnpm i --prefer-offline --no-cache"
+        },
+        "i:web": {
+            "directory": "apps/web",
+            "command": "pnpm i --filter web  --prefer-offline --no-cache"
+        },
+        "i:prod": {
+            "directory": "apps/prod",
+            "command": "pnpm install --ignore-workspace"
+        },
+        "i:eslint-config": {
+            "directory": "packages/eslint-config",
+            "command": "pnpm i --filter eslint-config  --prefer-offline --no-cache"
+        },
+        "i:typescript-config": {
+            "directory": "packages/typescript-config",
+            "command": "pnpm i --filter typescript-config  --prefer-offline --no-cache"
+        },
+        "i:ui": {
+            "directory": "packages/ui",
+            "command": "pnpm i --filter ui  --prefer-offline --no-cache"
+        },
+        "build:all": {
+            "tasks": [
+                "build:app",
+                "build:web"
+            ]
+        },
+        "build:web": {
+            "directory": "apps/web",
+            "command": "pnpm run build"
+        },
+        "build:prod": {
+            "directory": "apps/prod",
+            "command": "pnpm run build"
+        },
+        "build:prodNow": {
+            "sequential": true,
+            "tasks": [
+                "update:app",
+                "update:web",
+                "patch:prod"
+            ]
+        },
+        "build:prodQuick": {
+            "sequential": true,
+            "tasks": [
+                "update:app",
+                "update:client",
+                "update:dealer",
+                "update:comps",
+                "patch:prod"
+            ]
+        },
+        "build:prodFull": {
+            "sequential": true,
+            "tasks": [
+                "clean:prod",
+                "update:app",
+                "update:client",
+                "update:dealer",
+                "update:comps",
+                "update:pkg",
+                "update:essentials",
+                "i:prod",
+                "build:prod",
+                "patch:prod"
+            ]
+        },
+        "update:client": {
+            "directory": "apps",
+            "command": "robocopy \"app\\app\routes\\client\\*\" \"prod\\app\routes\\client\\*\"  /XO /E /NFL /NDL /R:1 /W:1 /MT:16"
+        },
+        "update:dealer": {
+            "directory": "apps",
+            "command": "robocopy \"app\\app\routes\\dealer\\*\" -Destination \"prod\\app\routes\\dealer\\*\"  /XO /E /NFL /NDL /R:1 /W:1 /MT:16"
+        },
+        "update:comps": {
+            "directory": "apps",
+            "command": "robocopy \"app\\app\\components\\*\" -Destination \"prod\\app\\components\\*\"  /XO /E /NFL /NDL /R:1 /W:1 /MT:16"
+        },
+        "update:pkg": {
+            "directory": "apps",
+            "command": "robocopy \"app\\package.json\" \"prod\\package.json\" /XO /E /NFL /NDL /R:1 /W:1 /MT:16"
+        },
+        "update:essentials": {
+            "directory": "apps",
+            "tasks": [
+                "u:gitignore",
+                "u:prisma",
+                "u:remixconfig",
+                "u:tailwind",
+                "u:postcss",
+                "u:componentsJson",
+                "u:remixenv",
+                "u:server",
+                "u:public"
+            ]
+        },
+        "u:gitignore": {
+            "directory": "apps",
+            "command": "robocopy \"app\\.gitignore\" \"prod\\.gitignore\" /XO /IT /E"
+        },
+        "u:prisma": {
+            "directory": "apps",
+            "command": "robocopy \"app\\prisma\\*\" \"prod\\prisma\\*\" /XO /IT /E"
+        },
+        "u:remixconfig": {
+            "directory": "apps",
+            "command": "robocopy \"app\remix.config.js\" \"prod\remix.config.js\" /XO /IT /E"
+        },
+        "u:tailwind": {
+            "directory": "apps",
+            "command": "robocopy \"app\tailwind.config.js\" \"prod\tailwind.config.js\" /XO /IT /E"
+        },
+        "u:postcss": {
+            "directory": "apps",
+            "command": "robocopy \"app\\postcss.config.js\" \"prod\\postcss.config.js\" /XO /IT /E"
+        },
+        "u:componentsJson": {
+            "directory": "apps",
+            "command": "robocopy \"app\\components.json\" \"prod\\components.json\" /XO /IT /E"
+        },
+        "u:remixenv": {
+            "directory": "apps",
+            "command": "robocopy \"app\remix.env.d.ts\" \"prod\remix.env.d.ts\" /XO /IT /E"
+        },
+        "u:server": {
+            "directory": "apps",
+            "command": "robocopy \"app\\server.ts\" \"prod\\server.ts\" /XO /IT /E"
+        },
+        "u:public": {
+            "directory": "apps",
+            "command": "robocopy \"app\\public\\*\" \"prod\\public\\*\" /XO /IT /E"
+        },
+        "patch:all": {
+            "tasks": [
+                "patch:app",
+                "patch:web",
+                "patch:prod"
+            ]
+        },
+        "patch:prod": {
+            "directory": "apps/prod",
+            "command": "git add * && git commit -m \"Cleaning w/ push\" && git push && pnpm version patch && git push && git push --tags"
+        },
+        "push:all": {
+            "tasks": [
+                "push:app",
+                "push:web",
+                "push:prod"
+            ]
+        },
+        "push:web": {
+            "directory": "apps/web",
+            "command": "git add * && git commit -m \"Cleaning w/ push\" && git push"
+        },
+        "push:prod": {
+            "directory": "apps/prod",
+            "command": "git add * && git commit -m \"Cleaning w/ push\" && git push"
+        },
+        "dev:all": {
+            "tasks": [
+                "dev:app",
+                "dev:web"
+            ]
+        },
+        "db:all": {
+            "tasks": [
+                "db:app",
+                "db:web",
+                "db:prod"
+            ]
+        },
+        "db:prod": {
+            "directory": "apps/prod",
+            "command": "pnpm run db:all"
+        },
+        "db:web": {
+            "directory": "apps/web",
+            "command": "pnpm run db:all"
+        },
+        "gen:all": {
+            "tasks": [
+                "gen:app",
+                "gen:web",
+                "gen:prod"
+            ]
+        },
+        "gen:web": {
+            "directory": "apps/web",
+            "command": "pnpm run db:gen"
+        },
+        "gen:prod": {
+            "directory": "apps/prod",
+            "command": "pnpm run db:gen"
+        },
+        "sym:file": {
+            "directory": "apps",
+            "command": "New-Item -ItemType SymbolicLink -Path \"apps/${newFile}\" -Target \"apps/${sourceFile}\""
+        }
+    }
+}

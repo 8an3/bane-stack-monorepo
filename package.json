@@ -1,22 +1,33 @@
 {
-  "name": "shadcn-ui-monorepo",
+  "name": "bane-monorepo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prisma:studio": "prisma studio --browser none",
+    "prisma:push": "prisma db push",
+    "db:gen": "npx prisma generate",
+    "db:PS": "prisma db push && prisma db seed",
+    "db:all": "prisma db push --force-reset && prisma db push && prisma db seed && prisma generate",
+    "db:seed": "prisma db seed",
+    "postbuild": "prisma generate",
+    "prisma:reset": "prisma db push --force-reset"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.5",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "tsx": "^3.12.7"
   },
   "packageManager": "pnpm@10.4.1",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "prisma-docs-generator": "0.7.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
