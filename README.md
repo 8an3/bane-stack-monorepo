@@ -1,16 +1,31 @@
 # 8an3/bane - Monorepo
 
+
 ```sh
 git clone https://github.com/8an3/bane-stack-monorepo.git
 ```
-
+```sh
+cd bane-stack-monorepo
+```
 ```sh
 str i:all
 ```
->if you dont already have str globally and dont want to install it globally
+>If you dont already have str globally and you are not interested in it
 
 ```sh
 pnpm i
+```
+>If you do want str globally
+```sh
+npm -g install superuser-task-runner
+```
+>Or just in the workspace
+```sh
+pnpm install superuser-task-runner
+```
+>Once installed 
+```sh
+str i:all
 ```
 
 - Apps
