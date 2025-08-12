@@ -1,6 +1,6 @@
 {
   "name": "bane-monorepo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
