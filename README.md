@@ -23,6 +23,10 @@ npm -g install superuser-task-runner
 ```sh
 pnpm install superuser-task-runner
 ```
+>If this is your [first time running str](#first-time-running-str) 
+```sh
+str init
+```
 >Once str is installed 
 ```sh
 str i:all
@@ -53,3 +57,7 @@ pnpm i --filter app  --prefer-offline --no-cache
 - [ ] re-test everything
 - [ ] convert components into a package to be reusable over multiple apps
 - [ ] test react-router in the root project
+
+## First Time Running Str
+
+If this is your first time using str, feel free to check out DevStack on vscode marketplace as it was merged with it and hosts a nice ui for str, unless you enjoy the cli more then dont worry about it
