@@ -101,7 +101,6 @@
             "tasks": [
                 "i:app",
                 "i:web",
-                "i:prod",
                 "i:eslint-config",
                 "i:typescript-config",
                 "i:ui"
@@ -260,6 +259,12 @@
                 "push:app",
                 "push:web",
                 "push:prod"
+            ]
+        },
+            "init:all": {
+            "tasks": [
+                "i:app",
+                "i:web"
             ]
         },
         "push:web": {

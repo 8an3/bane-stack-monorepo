@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "str": "str init",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
