@@ -1,4 +1,4 @@
-import Calendar05 from "~/components/blocks/calendars/calendar-05"
+import {Calendar01} from "~/components/blocks/calendars/calendar-01"
 import { Card, CardContent } from "~/components/ui/card"
 import { Label } from "~/components/ui/label"
 
@@ -10,7 +10,7 @@ export function DemoDatePicker() {
           <Label htmlFor="date" className="shrink-0">
             Pick a date
           </Label>
-          <Calendar05 />
+          <Calendar01 />
         </div>
       </CardContent>
     </Card>

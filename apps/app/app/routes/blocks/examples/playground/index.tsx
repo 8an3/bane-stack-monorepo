@@ -1,319 +1,104 @@
- 
-import { RotateCcw } from "lucide-react"
-
-import { Button } from "~/components/ui"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "~/components/ui/hover-card"
-import { Label } from "~/components/ui/label"
-import { Separator } from "~/components/ui/separator"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "~/components/ui/tabs"
-import { Textarea } from "~/components/ui/textarea"
-
-import { CodeViewer } from "./components/code-viewer"
-import { MaxLengthSelector } from "./components/maxlength-selector"
-import { ModelSelector } from "./components/model-selector"
-import { PresetActions } from "./components/preset-actions"
-import { PresetSave } from "./components/preset-save"
-import { PresetSelector } from "./components/preset-selector"
-import { PresetShare } from "./components/preset-share"
-import { TemperatureSelector } from "./components/temperature-selector"
-import { TopPSelector } from "./components/top-p-selector"
-import { models, types } from "./data/models"
-import { presets } from "./data/presets"
-
-export const meta: MetaFunction = () => {
-	return [
-		{ title: "Playground - 8an3/Bane" },
-		{ name: "description", content: "8an3/Bane Remix Stack" },
-	];
-};
-
-export default function PlaygroundPage() {
-  return (
-    <>
- 
-      <div className="hidden h-full flex-col md:flex">
-        <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <h2 className="text-lg font-semibold">Playground</h2>
-          <div className="ml-auto flex w-full space-x-2 sm:justify-end">
-            <PresetSelector presets={presets} />
-            <PresetSave />
-            <div className="hidden space-x-2 md:flex">
-              <CodeViewer />
-              <PresetShare />
-            </div>
-            <PresetActions />
-          </div>
-        </div>
-        <Separator />
-        <Tabs defaultValue="complete" className="flex-1">
-          <div className="container h-full py-6">
-            <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px]">
-              <div className="hidden flex-col space-y-4 sm:flex md:order-2">
-                <div className="grid gap-2">
-                  <HoverCard openDelay={200}>
-                    <HoverCardTrigger asChild>
-                      <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Mode
-                      </span>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-[320px] text-sm" side="left">
-                      Choose the interface that best suits your task. You can
-                      provide: a simple prompt to complete, starting and ending
-                      text to insert a completion within, or some text with
-                      instructions to edit it.
-                    </HoverCardContent>
-                  </HoverCard>
-                  <TabsList className="grid grid-cols-3">
-                    <TabsTrigger value="complete">
-                      <span className="sr-only">Complete</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        className="h-5 w-5"
-                      >
-                        <rect
-                          x="4"
-                          y="3"
-                          width="12"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="4"
-                          y="7"
-                          width="12"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="4"
-                          y="11"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="4"
-                          y="15"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="8.5"
-                          y="11"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="8.5"
-                          y="15"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="13"
-                          y="11"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                      </svg>
-                    </TabsTrigger>
-                    <TabsTrigger value="insert">
-                      <span className="sr-only">Insert</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        className="h-5 w-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M14.491 7.769a.888.888 0 0 1 .287.648.888.888 0 0 1-.287.648l-3.916 3.667a1.013 1.013 0 0 1-.692.268c-.26 0-.509-.097-.692-.268L5.275 9.065A.886.886 0 0 1 5 8.42a.889.889 0 0 1 .287-.64c.181-.17.427-.267.683-.269.257-.002.504.09.69.258L8.903 9.87V3.917c0-.243.103-.477.287-.649.183-.171.432-.268.692-.268.26 0 .509.097.692.268a.888.888 0 0 1 .287.649V9.87l2.245-2.102c.183-.172.432-.269.692-.269.26 0 .508.097.692.269Z"
-                          fill="currentColor"
-                        ></path>
-                        <rect
-                          x="4"
-                          y="15"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="8.5"
-                          y="15"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="13"
-                          y="15"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                      </svg>
-                    </TabsTrigger>
-                    <TabsTrigger value="edit">
-                      <span className="sr-only">Edit</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        className="h-5 w-5"
-                      >
-                        <rect
-                          x="4"
-                          y="3"
-                          width="12"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="4"
-                          y="7"
-                          width="12"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="4"
-                          y="11"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="4"
-                          y="15"
-                          width="4"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <rect
-                          x="8.5"
-                          y="11"
-                          width="3"
-                          height="2"
-                          rx="1"
-                          fill="currentColor"
-                        ></rect>
-                        <path
-                          d="M17.154 11.346a1.182 1.182 0 0 0-1.671 0L11 15.829V17.5h1.671l4.483-4.483a1.182 1.182 0 0 0 0-1.671Z"
-                          fill="currentColor"
-                        ></path>
-                      </svg>
-                    </TabsTrigger>
-                  </TabsList>
-                </div>
-                <ModelSelector types={types} models={models} />
-                <TemperatureSelector defaultValue={[0.56]} />
-                <MaxLengthSelector defaultValue={[256]} />
-                <TopPSelector defaultValue={[0.9]} />
-              </div>
-              <div className="md:order-1">
-                <TabsContent value="complete" className="mt-0 border-0 p-0">
-                  <div className="flex h-full flex-col space-y-4">
-                    <Textarea
-                      placeholder="Write a tagline for an ice cream shop"
-                      className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
-                    />
-                    <div className="flex items-center space-x-2">
-                      <Button>Submit</Button>
-                      <Button variant="secondary">
-                        <span className="sr-only">Show history</span>
-                        <RotateCcw />
-                      </Button>
-                    </div>
-                  </div>
-                </TabsContent>
-                <TabsContent value="insert" className="mt-0 border-0 p-0">
-                  <div className="flex flex-col space-y-4">
-                    <div className="grid h-full grid-rows-2 gap-6 lg:grid-cols-2 lg:grid-rows-1">
-                      <Textarea
-                        placeholder="We're writing to [inset]. Congrats from OpenAI!"
-                        className="h-full min-h-[300px] lg:min-h-[700px] xl:min-h-[700px]"
-                      />
-                      <div className="rounded-md border bg-muted"></div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button>Submit</Button>
-                      <Button variant="secondary">
-                        <span className="sr-only">Show history</span>
-                        <RotateCcw />
-                      </Button>
-                    </div>
-                  </div>
-                </TabsContent>
-                <TabsContent value="edit" className="mt-0 border-0 p-0">
-                  <div className="flex flex-col space-y-4">
-                    <div className="grid h-full gap-6 lg:grid-cols-2">
-                      <div className="flex flex-col space-y-4">
-                        <div className="flex flex-1 flex-col space-y-2">
-                          <Label htmlFor="input">Input</Label>
-                          <Textarea
-                            id="input"
-                            placeholder="We is going to the market."
-                            className="flex-1 lg:min-h-[580px]"
-                          />
-                        </div>
-                        <div className="flex flex-col space-y-2">
-                          <Label htmlFor="instructions">Instructions</Label>
-                          <Textarea
-                            id="instructions"
-                            placeholder="Fix the grammar."
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-[21px] min-h-[400px] rounded-md border bg-muted lg:min-h-[700px]" />
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button>Submit</Button>
-                      <Button variant="secondary">
-                        <span className="sr-only">Show history</span>
-                        <RotateCcw />
-                      </Button>
-                    </div>
-                  </div>
-                </TabsContent>
-              </div>
-            </div>
-          </div>
-        </Tabs>
-      </div>
-    </>
-  )
-}
+import { Scaffolding } from "~/components/customUi/scaffolding";
+import PlaygroundPage from "./PlaygroundPage";
+import codeviewer from "./components/code-viewer";
+import maxlengthselector from "./components/maxlength-selector";
+import modelselector from "./components/model-selector";
+import presetactions from "./components/preset-actions";
+import presetsave from "./components/preset-save";
+import presetselector from "./components/preset-selector";
+import presetshare from "./components/preset-share";
+import temperatureselector from "./components/temperature-selector";
+import toppselector from "./components/top-p-selector";
+import models from "./data/models";
+import presets from "./data/presets";
+import { useEffect, useState } from "react";
+import MonacoEditor from "../editor/components2";
 
 export async function loader({ request }: LoaderArgs) {
-  return null
+	return null;
+}
+
+
+export default function DefaultPage() {
+	const [selectedCode, setSelectedCode] = useState("");
+	const [name, setName] = useState("PlaygroundPage");
+
+	const sections = [
+		{ name: "PlaygroundPage", value: "PlaygroundPage", path: "/examples/playground/PlaygroundPage.tsx.txt" },
+		{ name: "models", value: "models", path: "/examples/playground/models.ts.txt" },
+		{ name: "presets", value: "presets", path: "/examples/playground/presets.ts.txt" },
+		{ name: "code-viewer", value: "code-viewer", path: "/examples/playground/code-viewer.tsx.txt" },
+		{ name: "maxlength-selector", value: "maxlength-selector", path: "/examples/playground/maxlength-selector.tsx.txt" },
+		{ name: "model-selector", value: "model-selector", path: "/examples/playground/model-selector.tsx.txt" },
+		{ name: "preset-actions", value: "preset-actions", path: "/examples/playground/preset-actions.tsx.txt" },
+		{ name: "preset-save", value: "preset-save", path: "/examples/playground/preset-save.tsx.txt" },
+		{ name: "preset-selector", value: "preset-selector", path: "/examples/playground/preset-selector.tsx.txt" },
+		{ name: "preset-share", value: "preset-share", path: "/examples/playground/preset-share.tsx.txt" },
+		{ name: "temperature-selector", value: "temperature-selector", path: "/examples/playground/temperature-selector.tsx.txt" },
+		{ name: "top-p-selector", value: "top-p-selector", path: "/examples/playground/top-p-selector.tsx.txt" },
+	];
+	let viewSelected;
+	switch (name) {
+		case "PlaygroundPage":
+			viewSelected = <PlaygroundPage />;
+			break;
+		case "models":
+			viewSelected = <Scaffolding title="models" />;
+			break;
+		case "presets":
+			viewSelected = <Scaffolding title="presets" />;
+			break;
+		case "code-viewer":
+			viewSelected = <Scaffolding title="code-viewer" />;
+			break;
+		case "maxlength-selector":
+			viewSelected = <Scaffolding title="momaxlength-selectordels" />;
+			break;
+		case "model-selector":
+			viewSelected = <Scaffolding title="model-selector" />;
+			break;
+		case "preset-actions":
+			viewSelected = <Scaffolding title="preset-actions" />;
+			break;
+		case "preset-save":
+			viewSelected = <Scaffolding title="preset-save" />;
+			break;
+		case "preset-selector":
+			viewSelected = <Scaffolding title="preset-selector" />;
+			break;
+		case "preset-share":
+			viewSelected = <Scaffolding title="preset-share" />;
+			break;
+		case "temperature-selector":
+			viewSelected = <Scaffolding title="temperature-selector" />;
+			break;
+		case "top-p-selector":
+			viewSelected = <Scaffolding title="top-p-selector" />;
+			break;
+		default:
+			viewSelected = <PlaygroundPage />;
+			break;
+	}
+	useEffect(() => {
+		if (!selectedCode) return;
+
+		const loadHookCode = async (url) => {
+			try {
+				const response = await fetch(url);
+				if (!response.ok) throw new Error(`HTTP ${response.status}`);
+				const codeContent = await response.text();
+				setSelectedCode(codeContent);
+			} catch (error) {
+				console.error(`Failed to load ${url}:`, error);
+				setSelectedCode(`// Failed to load ${url}\n// Error: ${error.message}`);
+			}
+		};
+
+		loadHookCode(selectedCode);
+	}, [selectedCode]);
+	return (
+		<div className="flex flex-col justify-center gap-4">
+			<MonacoEditor viewSelected={viewSelected} code={selectedCode} sections={sections} setName={setName} name={name} />
+		</div>
+	);
 }

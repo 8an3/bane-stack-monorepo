@@ -1,7 +1,7 @@
 import { useFetcher } from "@remix-run/react"
 import { useState } from "react"
 import { toast } from "sonner"
-import { Button } from "~/components/ui"
+import { Button, Separator } from "~/components/ui"
 import { Checkbox } from "~/components/ui/checkbox"
 import { Label } from "~/components/ui/label"
 
@@ -78,7 +78,15 @@ export function DisplayForm() {
   }
 
   return (
-    <fetcher.Form onSubmit={handleSubmit} className="space-y-8">
+        <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-medium">Display</h3>
+        <p className="text-sm text-muted-foreground">
+          Turn items on or off to control what&apos;s displayed in the app.
+        </p>
+      </div>
+      <Separator />
+      <fetcher.Form onSubmit={handleSubmit} className="space-y-8">
       <div>
         <div className="mb-4">
           <Label className="text-base">Sidebar</Label>
@@ -128,5 +136,7 @@ export function DisplayForm() {
         {fetcher.state === "submitting" ? "Updating..." : "Update display"}
       </Button>
     </fetcher.Form>
+    </div>
+    
   )
 }

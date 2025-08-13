@@ -20,6 +20,7 @@ export const NavButtonStyled = ({
   spinnerSize = 6, // in rem units
   isDisabledWhenLoading = true,
   children,
+  ...props
 }) => {
   const nav = useNavigation()
   const resolvedTo = useResolvedPath(to);

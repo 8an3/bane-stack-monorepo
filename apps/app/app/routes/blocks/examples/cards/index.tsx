@@ -10,6 +10,8 @@ import { DemoPaymentMethod } from "./components/payment-method"
 import { DemoReportAnIssue } from "./components/report-an-issue"
 import { DemoShareDocument } from "./components/share-document"
 import { DemoTeamMembers } from "./components/team-members"
+import CardsDemo2 from "../cards2"
+import { NavLink } from "@remix-run/react"
 
 export const meta: MetaFunction = () => {
 	return [
@@ -35,7 +37,11 @@ function DemoContainer({
 
 export default function CardsPage() {
   return (
-    <>
+    <div className="flex flex-col justify-center mt-[25px] gap-[25px]">
+          <NavLink to="/blocks/examples/editor/components" className=" font-medium transition-colors hover:text-primary text-muted-foreground mx-auto"  >
+        To get the code for this page click here, then search for cards
+      </NavLink>
+    <CardsDemo2 />
       <div className="hidden items-start justify-center gap-6 rounded-lg p-8 md:grid lg:grid-cols-2 xl:grid-cols-3">
         <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
           <DemoContainer>
@@ -71,7 +77,7 @@ export default function CardsPage() {
           </DemoContainer>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

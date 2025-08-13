@@ -4,7 +4,6 @@ import { authSessionStorage } from "./auth_session";
 import { FormStrategy } from "remix-auth-form";
 import { prisma } from "~/modules/libs/prisma";
 import bcrypt from "bcryptjs";
-import { json } from "@remix-run/node";
 
 export const authenticator = new Authenticator<User>(authSessionStorage);
 

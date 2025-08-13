@@ -4,12 +4,22 @@ import { toast } from "sonner";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { cn } from "~/components/ui/utils";
+import { Separator } from "~/components/ui";
 
 export function AppearanceForm() {
 	const fetcher = useFetcher();
 
 	return (
-		<fetcher.Form
+		<div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-medium">Appearance</h3>
+        <p className="text-sm text-muted-foreground">
+          Customize the appearance of the app. Automatically switch between day
+          and night themes.
+        </p>
+      </div>
+      <Separator/>
+      <fetcher.Form
 			method="post"
 			className="space-y-8"
 			onSubmit={(e) => {
@@ -87,5 +97,7 @@ export function AppearanceForm() {
 
 			<Button type="submit">Update preferences</Button>
 		</fetcher.Form>
+    </div>
+		
 	);
 }

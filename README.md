@@ -60,4 +60,4 @@ pnpm i --filter app  --prefer-offline --no-cache
 
 ## First Time Running Str
 
-If this is your first time using str, feel free to check out DevStack on vscode marketplace as it was merged with it and hosts a nice ui for str, unless you enjoy the cli more then dont worry about it
+If this is your first time using str, feel free to check out DevStack on vscode marketplace as it was merged with that extension and hosts a nice ui for str, unless you enjoy the cli more then dont worry about it

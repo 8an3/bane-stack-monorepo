@@ -1,5 +1,5 @@
-import { Outlet, useLoaderData } from "@remix-run/react";
-import { Sidebar, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger, useSidebar, SidebarMenuAction, SidebarFooter, SidebarHeader, SidebarContent, SidebarProvider, SidebarInset, } from "~/components/ui/sidebar";
+import { Outlet  } from "@remix-run/react";
+import {  SidebarProvider, SidebarInset, } from "~/components/ui/sidebar";
 import eP from '~/utils/ext';
 import { useState } from "react";
 import { SiteHeader } from "~/components/site/site-header";
@@ -11,16 +11,13 @@ export async function loader({ request, params }: LoaderFunction) {
 	//const email = session.get("email");
 	//const user = await eP.user.all(email)
 	///if (!user) return redirect(import.meta.env.LOGIN)
- 
 	//const s = eP.parentStore.one()
- 
 	return null
 }
 
 export default function Quote() {
 //	const { navItems } = useLoaderData()
 	const [navData, setNavData] = useState(navItems)
-
 	return (
 			<SidebarProvider className="min-h-screen" defaultOpen={false}>
 				<AppSidebar

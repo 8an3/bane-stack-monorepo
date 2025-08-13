@@ -1,54 +1,24 @@
 
 
-import * as React from "react"
-import { Check, ChevronsUpDown, PlusCircle } from "lucide-react"
+import * as React from "react";
+import { Check, ChevronsUpDown, PlusCircle, } from "lucide-react";
 
-import { cn } from "~/components/ui/utils"
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/components/ui/avatar"
-import { Button } from "~/components/ui"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "~/components/ui/command"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/components/ui/dialog"
-import { Input } from "~/components/ui/input"
-import { Label } from "~/components/ui/label"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select"
+import { cn, } from "~/components/ui/utils";
+import { Avatar, AvatarFallback, AvatarImage, } from "~/components/ui/avatar";
+import { Button, } from "~/components/ui";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, } from "~/components/ui/command";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "~/components/ui/dialog";
+import { Input, } from "~/components/ui/input";
+import { Label, } from "~/components/ui/label";
+import { Popover, PopoverContent, PopoverTrigger, } from "~/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "~/components/ui/select";
 
 const groups = [
   {
     label: "Personal Account",
     teams: [
       {
-        label: "Alicia Koch",
+        label: "8an3/bane",
         value: "personal",
       },
     ],

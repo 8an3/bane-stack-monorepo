@@ -65,7 +65,7 @@ export default function OTPSignUp() {
 							<div className="flex flex-col items-center gap-2">
 								<NavLink to="/dealer/home" className="flex flex-col items-center gap-2 font-medium">
 									<div className="flex h-8 w-8 items-center justify-center rounded-md">
-										<Zap className="size-6" />
+										<Zap className="size-6  text-primary" />
 									</div>
 									<span className="sr-only">Catalyst Software</span>
 								</NavLink>
